@@ -1,0 +1,42 @@
+{
+  "nodes": [
+    {
+      "id": "node-1",
+      "className": "com.heapvortex.Application",
+      "retainedSize": 524288,
+      "isGcRoot": true
+    },
+    {
+      "id": "node-2",
+      "className": "com.heapvortex.UserService",
+      "retainedSize": 262144,
+      "isGcRoot": false
+    },
+    {
+      "id": "node-3",
+      "className": "com.heapvortex.UserRepository",
+      "retainedSize": 131072,
+      "isGcRoot": false
+    },
+    {
+      "id": "node-4",
+      "className": "com.heapvortex.User",
+      "retainedSize": 65536,
+      "isGcRoot": false
+    }
+  ],
+  "edges": [
+    {
+      "source": "node-1",
+      "target": "node-2"
+    },
+    {
+      "source": "node-2",
+      "target": "node-3"
+    },
+    {
+      "source": "node-3",
+      "target": "node-4"
+    }
+  ]
+}
