@@ -1,0 +1,14 @@
+package com.infotact.heapvortex_backend.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class ReferenceEdgeDto {
+    private String sourceId;
+    private String targetId;
+    private String referenceType;
+}
