@@ -39,8 +39,8 @@ export function createGraph(graphData) {
 
   // Create edges
   graphData.edges.forEach((edge) => {
-    const source = nodeObjects.get(edge.source);
-    const target = nodeObjects.get(edge.target);
+    const source = nodeObjects.get(edge.sourceId);
+    const target = nodeObjects.get(edge.targetId);
 
     if (!source || !target) {
       return;
