@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -69,6 +69,11 @@
 			<artifactId>spring-boot-starter-websocket-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.gridkit.jvmtool</groupId>
+			<artifactId>hprof-heap</artifactId>
+			<version>0.16</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -76,10 +81,21 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<!-- so 'mvn spring-boot:run' can access sun.tools.attach.HotSpotVirtualMachine -->
+					<jvmArguments>--add-exports jdk.attach/sun.tools.attach=ALL-UNNAMED</jvmArguments>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<!-- so 'mvn compile' can even see the internal class at compile time -->
+					<compilerArgs>
+						<arg>--add-exports</arg>
+						<arg>jdk.attach/sun.tools.attach=ALL-UNNAMED</arg>
+					</compilerArgs>
+				</configuration>
 				<executions>
 					<execution>
 						<id>default-compile</id>
@@ -112,6 +128,14 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<!-- so tests that touch this code can run too -->
+					<argLine>--add-exports jdk.attach/sun.tools.attach=ALL-UNNAMED</argLine>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
