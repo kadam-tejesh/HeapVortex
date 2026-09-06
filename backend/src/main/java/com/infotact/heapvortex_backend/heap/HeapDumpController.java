@@ -1,4 +1,4 @@
-package com.infotact.heapvortex_backend.controller;
+package com.infotact.heapvortex_backend.heap;
 
 import com.infotact.heapvortex_backend.heap.HeapAnalysisService;
 import org.springframework.web.bind.annotation.*;
